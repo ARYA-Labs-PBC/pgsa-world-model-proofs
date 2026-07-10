@@ -1,0 +1,16 @@
+
+# ── ARYA merge drivers (auto-resolve safe concurrent-PR conflict classes) ─────
+# union = git built-in (zero config); arya-manifest = custom, run once:
+#   scripts/git/install-arya-merge-drivers.sh        (repo-local)
+#   scripts/git/install-arya-merge-drivers.sh --global   (all repos on this box/CI)
+# Accumulative / append-only → union
+.gitignore            merge=union
+requirements*.txt     merge=union
+go.sum                merge=union
+CHANGELOG*.md         merge=union
+.claude/state/*.jsonl merge=union
+# Structured manifests (version bump → max-semver; deps/members add → union; logic → human)
+pyproject.toml        merge=arya-manifest
+package.json          merge=arya-manifest
+**/Cargo.toml         merge=arya-manifest
+# ─────────────────────────────────────────────────────────────────────────────
